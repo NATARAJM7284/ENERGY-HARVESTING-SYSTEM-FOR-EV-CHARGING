@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+// Define constants
+#define SOLAR_PANEL_VOLTAGE 12.0
+#define WIND_TURBINE_VOLTAGE 24.0
+
+// Function to simulate solar energy harvesting
+float harvestSolarEnergy() {
+    // Simulate varying solar energy levels
+    float solarIntensity = rand() % 100;  // Random value between 0 and 99
+    return (solarIntensity / 100) * SOLAR_PANEL_VOLTAGE;
+}
+
+// Function to simulate wind energy harvesting
+float harvestWindEnergy() {
+    // Simulate varying wind energy levels
+    float windSpeed = rand() % 30;  // Random value between 0 and 29 (in m/s)
+    
+    // Efficiency factor for wind turbine
+    float efficiency = 0.8;  
+    
+    return 0.5 * efficiency * windSpeed * windSpeed * WIND_TURBINE_VOLTAGE;
+}
+
+int main() {
+    // Initialize variables
+    float totalEnergy = 0.0;
+    bool solarPanelConnected = true;  // Change to false if not connected
+    bool windTurbineConnected = true;  // Change to false if not connected
+
+    // Harvest energy based on connected sources
+    if (solarPanelConnected) {
+        float solarEnergy = harvestSolarEnergy();
+        printf("Harvested %.2f Watts from solar energy.\n", solarEnergy);
+        totalEnergy += solarEnergy;
+    }
+
+    if (windTurbineConnected) {
+        float windEnergy = harvestWindEnergy();
+        printf("Harvested %.2f Watts from wind energy.\n", windEnergy);
+        totalEnergy += windEnergy;
+    }
+
+    // Output total harvested energy
+    printf("Total harvested energy: %.2f Watts\n", totalEnergy);
+
+    return 0;
+}
